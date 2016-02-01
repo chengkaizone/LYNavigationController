@@ -26,10 +26,11 @@ public class PushTransitionAnimator: NSObject, UIViewControllerAnimatedTransitio
         let fromControl = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         let toControl = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
         
-        containerView?.insertSubview(toControl.view, aboveSubview: fromControl.view)
-        
         shadowView = UIView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
         shadowView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0)
+        fromControl.view.addSubview(shadowView)
+        
+        containerView?.insertSubview(toControl.view, aboveSubview: fromControl.view)
         
         toControl.view.frame = CGRectMake(screenSize.width, 0, screenSize.width, screenSize.height)
         
@@ -42,9 +43,10 @@ public class PushTransitionAnimator: NSObject, UIViewControllerAnimatedTransitio
             self?.shadowView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.6)
             fromControl.view.transform = CGAffineTransformMakeScale(0.9, 0.9)
             toControl.view.frame = CGRectMake(0, 0, screenSize.width, screenSize.height)
-            }) { [weak self] (finished) -> Void in
+            }) { (finished) -> Void in
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
-                self?.shadowView.removeFromSuperview()
+                // 这里不能用weak self 会导致阴影无法移除
+                self.shadowView.removeFromSuperview()
         }
         
     }

@@ -26,10 +26,11 @@ public class PopTransitionAnimator: NSObject, UIViewControllerAnimatedTransition
         let fromControl = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         let toControl = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
         
-        containerView?.insertSubview(toControl.view, belowSubview: fromControl.view)
-        
         shadowView = UIView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
         shadowView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.6)
+        toControl.view.addSubview(shadowView)
+        
+        containerView?.insertSubview(toControl.view, belowSubview: fromControl.view)
         
         toControl.view.transform = CGAffineTransformMakeScale(0.9, 0.9)
         
@@ -42,9 +43,11 @@ public class PopTransitionAnimator: NSObject, UIViewControllerAnimatedTransition
             self?.shadowView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0)
             fromControl.view.frame = CGRectMake(screenSize.width, 0, screenSize.width, screenSize.height)
             toControl.view.transform = CGAffineTransformMakeScale(1.0, 1.0)
-            }) { [weak self] (finished) -> Void in
+            }) { (finished) -> Void in
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
-                self?.shadowView.removeFromSuperview()
+                // 这里不能用weak self 会导致阴影无法移除
+                self.shadowView.removeFromSuperview()
+                
         }
         
     }
