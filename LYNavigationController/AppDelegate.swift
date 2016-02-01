@@ -15,6 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds);
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false);
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade);
+        
+        let control = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LYNavigationController")
+        
+        // let naviController = UINavigationController(rootViewController: control);
+        self.window?.rootViewController = control;
+        
+        self.window?.makeKeyAndVisible();
+        
         // Override point for customization after application launch.
         return true
     }

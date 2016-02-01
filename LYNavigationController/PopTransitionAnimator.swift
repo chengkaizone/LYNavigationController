@@ -8,14 +8,16 @@
 
 import UIKit
 
-class PopTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+public class PopTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    var shadowView: UIView!
+    
+    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         
         return 0.5
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         
         let screenSize = UIScreen.mainScreen().bounds.size
         
@@ -26,24 +28,24 @@ class PopTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
         containerView?.insertSubview(toControl.view, belowSubview: fromControl.view)
         
+        shadowView = UIView(frame: CGRectMake(0, 0, screenSize.width, screenSize.height))
+        shadowView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.6)
+        
         toControl.view.transform = CGAffineTransformMakeScale(0.9, 0.9)
         
         fromControl.view.layer.shadowColor = UIColor.blackColor().CGColor
         fromControl.view.layer.shadowOpacity = 0.8
-        fromControl.view.layer.shadowRadius = 0
+        fromControl.view.layer.shadowRadius = 8
         
-        UIView.animateWithDuration(self.transitionDuration(transitionContext), animations: { () -> Void in
+        UIView.animateWithDuration(self.transitionDuration(transitionContext), animations: { [weak self] () -> Void in
             
+            self?.shadowView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0)
             fromControl.view.frame = CGRectMake(screenSize.width, 0, screenSize.width, screenSize.height)
             toControl.view.transform = CGAffineTransformMakeScale(1.0, 1.0)
-            }) { (finished) -> Void in
+            }) { [weak self] (finished) -> Void in
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
-                
+                self?.shadowView.removeFromSuperview()
         }
-        
-    }
-    
-    func animationEnded(transitionCompleted: Bool) {
         
     }
     

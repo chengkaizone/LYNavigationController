@@ -36,7 +36,7 @@
         <!--Navigation Controller-->
         <scene sceneID="OO2-ij-zWD">
             <objects>
-                <navigationController id="xlk-zH-2iZ" customClass="LYNavigationController" customModule="LYNavigationController" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LYNavigationController" id="xlk-zH-2iZ" customClass="LYNavigationController" customModule="LYNavigationController" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hcp-Xt-oyd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -48,6 +48,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEd-Wr-uO9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="588.5" y="399.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="bnH-n9-Jem">
