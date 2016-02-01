@@ -10,7 +10,7 @@ import UIKit
 
 public class LYNavigationController: UINavigationController {
     
-    public var interactiveTransition: UIPercentDrivenInteractiveTransition!
+    public var percentInteractiveTransition: UIPercentDrivenInteractiveTransition!
     // public var interactivePopGestureRecognizerType: Interactive
     
     override public func viewDidLoad() {
@@ -37,39 +37,24 @@ public class LYNavigationController: UINavigationController {
         let point = gesture.translationInView(gesture.view)
         let progress = point.x / gesture.view!.bounds.size.width
         
-        let state = gesture.state
-        
-        if state == .Began {
-            self.interactiveTransition = UIPercentDrivenInteractiveTransition()
+        switch gesture.state {
+        case .Began:
+            self.percentInteractiveTransition = UIPercentDrivenInteractiveTransition()
             self.popViewControllerAnimated(true)
-        } else if state == .Changed {
-            self.interactiveTransition.updateInteractiveTransition(progress)
-        } else if state == .Cancelled || state == .Ended {
+            break
+        case .Changed, .Possible:
+            self.percentInteractiveTransition.updateInteractiveTransition(progress)
+            break
+        case .Cancelled, .Ended, .Failed:
+            
             if progress > 0.5 {
-                self.interactiveTransition.finishInteractiveTransition()
+                self.percentInteractiveTransition.finishInteractiveTransition()
             } else {
-                self.interactiveTransition.cancelInteractiveTransition()
+                self.percentInteractiveTransition.cancelInteractiveTransition()
             }
-            self.interactiveTransition = nil
+            self.percentInteractiveTransition = nil
+            break
         }
-//        switch gesture.state {
-//        case .Began:
-//            self.interactiveTransition = UIPercentDrivenInteractiveTransition()
-//            self.popViewControllerAnimated(true)
-//            break
-//        case .Changed, .Possible:
-//            self.interactiveTransition.updateInteractiveTransition(progress)
-//            break
-//        case .Cancelled, .Ended, .Failed:
-//            
-//            if progress > 0.5 {
-//                self.interactiveTransition.finishInteractiveTransition()
-//            } else {
-//                self.interactiveTransition.cancelInteractiveTransition()
-//            }
-//            self.interactiveTransition = nil
-//            break
-//        }
         
     }
 
@@ -80,7 +65,7 @@ extension LYNavigationController: UINavigationControllerDelegate {
     public func navigationController(navigationController: UINavigationController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         
         if animationController.isKindOfClass(PopTransitionAnimator.self) {
-            return self.interactiveTransition
+            return self.percentInteractiveTransition
         }
         
         return nil
