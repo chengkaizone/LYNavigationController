@@ -5,16 +5,16 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--Second View Controller-->
+        <!--Pop-->
         <scene sceneID="MWE-Hc-ntB">
             <objects>
-                <viewController storyboardIdentifier="SecondViewController" id="Jea-mG-hSa" customClass="SecondViewController" customModule="LYNavigationController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondViewController" title="Pop" id="Jea-mG-hSa" customClass="SecondViewController" customModule="LYNavigationController" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2sJ-AK-lCo"/>
                         <viewControllerLayoutGuide type="bottom" id="IlY-HI-tcn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="go1-Y8-dFu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OA0-xq-awu">
@@ -27,11 +27,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.87632199578028547" blue="0.51894180290102199" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7pR-xx-Gvm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="269.5" y="813.5"/>
+            <point key="canvasLocation" x="633.5" y="238.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OO2-ij-zWD">
@@ -48,9 +49,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEd-Wr-uO9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="588.5" y="399.5"/>
+            <point key="canvasLocation" x="798.5" y="163.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Push-->
         <scene sceneID="bnH-n9-Jem">
             <objects>
                 <viewController storyboardIdentifier="ViewController" id="Red-52-b1U" customClass="ViewController" customModule="LYNavigationController" customModuleProvider="target" sceneMemberID="viewController">
@@ -72,11 +73,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.53143627441354857" green="1" blue="0.53607131310458767" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="zek-mg-aEZ"/>
+                    <navigationItem key="navigationItem" title="Push" id="zek-mg-aEZ"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HoF-SD-ilN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1074.5" y="231.5"/>
         </scene>
     </scenes>
 </document>

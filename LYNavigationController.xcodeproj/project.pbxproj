@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7EAACDD31C60426F0016C9E4 /* LYNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAACDD21C60426F0016C9E4 /* LYNavigationBar.swift */; };
+		7EAACDD51C604F3C0016C9E4 /* LYBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAACDD41C604F3C0016C9E4 /* LYBarButtonItem.swift */; };
 		7EE6740F1C5F453D00B91115 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE6740E1C5F453D00B91115 /* AppDelegate.swift */; };
 		7EE674111C5F453D00B91115 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE674101C5F453D00B91115 /* ViewController.swift */; };
 		7EE674141C5F453D00B91115 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EE674121C5F453D00B91115 /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7EAACDD21C60426F0016C9E4 /* LYNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYNavigationBar.swift; sourceTree = "<group>"; };
+		7EAACDD41C604F3C0016C9E4 /* LYBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYBarButtonItem.swift; sourceTree = "<group>"; };
 		7EE6740B1C5F453D00B91115 /* LYNavigationController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LYNavigationController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE6740E1C5F453D00B91115 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EE674101C5F453D00B91115 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 				7EE674221C5F48F100B91115 /* PushTransitionAnimator.swift */,
 				7EE674241C5F4BB800B91115 /* PopTransitionAnimator.swift */,
 				7EE674261C5F4C6100B91115 /* SecondViewController.swift */,
+				7EAACDD21C60426F0016C9E4 /* LYNavigationBar.swift */,
+				7EAACDD41C604F3C0016C9E4 /* LYBarButtonItem.swift */,
 			);
 			path = LYNavigationController;
 			sourceTree = "<group>";
@@ -149,8 +155,10 @@
 			files = (
 				7EE674271C5F4C6100B91115 /* SecondViewController.swift in Sources */,
 				7EE674111C5F453D00B91115 /* ViewController.swift in Sources */,
+				7EAACDD31C60426F0016C9E4 /* LYNavigationBar.swift in Sources */,
 				7EE674231C5F48F100B91115 /* PushTransitionAnimator.swift in Sources */,
 				7EE674251C5F4BB800B91115 /* PopTransitionAnimator.swift in Sources */,
+				7EAACDD51C604F3C0016C9E4 /* LYBarButtonItem.swift in Sources */,
 				7EE674211C5F456A00B91115 /* LYNavigationController.swift in Sources */,
 				7EE6740F1C5F453D00B91115 /* AppDelegate.swift in Sources */,
 			);
@@ -304,6 +312,7 @@
 				7EE6741F1C5F453D00B91115 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

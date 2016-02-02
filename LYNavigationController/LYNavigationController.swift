@@ -11,7 +11,13 @@ import UIKit
 public class LYNavigationController: UINavigationController {
     
     public var percentInteractiveTransition: UIPercentDrivenInteractiveTransition!
-    // public var interactivePopGestureRecognizerType: Interactive
+    
+    public var lyNavigationBar: LYNavigationBar!
+    public var lyNavigationBarHidden: Bool = false {
+        didSet {
+            self.lyNavigationBar.hidden = lyNavigationBarHidden
+        }
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +25,12 @@ public class LYNavigationController: UINavigationController {
         self.navigationBar.hidden = true
         self.delegate = self
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        self.lyNavigationBar = LYNavigationBar(frame: CGRectZero)
+        self.topViewController?.view.addSubview(lyNavigationBar)
+        self.lyNavigationBar.title = "Push"
+        
+        self.lyNavigationBar.hidden = lyNavigationBarHidden
         
         setupGesture()
     }
@@ -30,6 +42,16 @@ public class LYNavigationController: UINavigationController {
 
     override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    public override func pushViewController(viewController: UIViewController, animated: Bool) {
+        
+        let naviBar = LYNavigationBar(frame: CGRectZero)
+        
+        viewController.view.addSubview(naviBar)
+        naviBar.title = viewController.title
+        
+        super.pushViewController(viewController, animated: animated)
     }
     
     func panGesture(gesture: UIPanGestureRecognizer) {
