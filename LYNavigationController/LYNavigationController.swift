@@ -58,14 +58,24 @@ open class LYNavigationController: UINavigationController {
         
         let point = gesture.translation(in: gesture.view)
         let progress = point.x / gesture.view!.bounds.size.width
-        
+    
         switch gesture.state {
         case .began:
             self.percentInteractiveTransition = UIPercentDrivenInteractiveTransition()
             self.popViewController(animated: true)
             break
         case .changed, .possible:
-            self.percentInteractiveTransition.update(progress)
+            if point.x <= 0 {
+                self.percentInteractiveTransition.update(0)
+            } else {
+                
+                let value = abs(point.y)
+                if point.x < value {
+                    self.percentInteractiveTransition.update(0)
+                } else {
+                    self.percentInteractiveTransition.update(progress)
+                }
+            }
             break
         case .cancelled, .ended, .failed:
             
