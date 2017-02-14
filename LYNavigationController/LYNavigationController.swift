@@ -8,45 +8,45 @@
 
 import UIKit
 
-public class LYNavigationController: UINavigationController {
+open class LYNavigationController: UINavigationController {
     
-    public var percentInteractiveTransition: UIPercentDrivenInteractiveTransition!
+    open var percentInteractiveTransition: UIPercentDrivenInteractiveTransition!
     
-    public var lyNavigationBar: LYNavigationBar!
-    public var lyNavigationBarHidden: Bool = false {
+    open var lyNavigationBar: LYNavigationBar!
+    open var lyNavigationBarHidden: Bool = false {
         didSet {
-            self.lyNavigationBar.hidden = lyNavigationBarHidden
+            self.lyNavigationBar.isHidden = lyNavigationBarHidden
         }
     }
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationBar.hidden = true
+        self.navigationBar.isHidden = true
         self.delegate = self
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.lyNavigationBar = LYNavigationBar(frame: CGRectZero)
+        self.lyNavigationBar = LYNavigationBar(frame: CGRect.zero)
         self.topViewController?.view.addSubview(lyNavigationBar)
         self.lyNavigationBar.title = "Push"
         
-        self.lyNavigationBar.hidden = lyNavigationBarHidden
+        self.lyNavigationBar.isHidden = lyNavigationBarHidden
         
         setupGesture()
     }
     
     func setupGesture() {
-        let panGesture = UIPanGestureRecognizer(target: self, action: "panGesture:")
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(LYNavigationController.panGesture(_:)))
         self.interactivePopGestureRecognizer?.view?.addGestureRecognizer(panGesture)
     }
 
-    override public func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    public override func pushViewController(viewController: UIViewController, animated: Bool) {
+    open override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         
-        let naviBar = LYNavigationBar(frame: CGRectZero)
+        let naviBar = LYNavigationBar(frame: CGRect.zero)
         
         viewController.view.addSubview(naviBar)
         naviBar.title = viewController.title
@@ -54,25 +54,25 @@ public class LYNavigationController: UINavigationController {
         super.pushViewController(viewController, animated: animated)
     }
     
-    func panGesture(gesture: UIPanGestureRecognizer) {
+    func panGesture(_ gesture: UIPanGestureRecognizer) {
         
-        let point = gesture.translationInView(gesture.view)
+        let point = gesture.translation(in: gesture.view)
         let progress = point.x / gesture.view!.bounds.size.width
         
         switch gesture.state {
-        case .Began:
+        case .began:
             self.percentInteractiveTransition = UIPercentDrivenInteractiveTransition()
-            self.popViewControllerAnimated(true)
+            self.popViewController(animated: true)
             break
-        case .Changed, .Possible:
-            self.percentInteractiveTransition.updateInteractiveTransition(progress)
+        case .changed, .possible:
+            self.percentInteractiveTransition.update(progress)
             break
-        case .Cancelled, .Ended, .Failed:
+        case .cancelled, .ended, .failed:
             
             if progress > 0.5 {
-                self.percentInteractiveTransition.finishInteractiveTransition()
+                self.percentInteractiveTransition.finish()
             } else {
-                self.percentInteractiveTransition.cancelInteractiveTransition()
+                self.percentInteractiveTransition.cancel()
             }
             self.percentInteractiveTransition = nil
             break
@@ -84,21 +84,21 @@ public class LYNavigationController: UINavigationController {
 
 extension LYNavigationController: UINavigationControllerDelegate {
     
-    public func navigationController(navigationController: UINavigationController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    public func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         
-        if animationController.isKindOfClass(PopTransitionAnimator.self) {
+        if animationController.isKind(of: PopTransitionAnimator.self) {
             return self.percentInteractiveTransition
         }
         
         return nil
     }
     
-    public func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        if operation == .Push {
+        if operation == .push {
             
             return PushTransitionAnimator()
-        } else if operation == .Pop {
+        } else if operation == .pop {
             
             return PopTransitionAnimator()
         }
@@ -110,7 +110,7 @@ extension LYNavigationController: UINavigationControllerDelegate {
 
 extension LYNavigationController: UIGestureRecognizerDelegate {
     
-    public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if self.viewControllers.count > 1 {
             return true
         }

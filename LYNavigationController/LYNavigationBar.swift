@@ -10,21 +10,21 @@ import UIKit
 
 
 ///
-public class LYNavigationBar: UIView {
+open class LYNavigationBar: UIView {
     
-    private let navigationBarHeight: CGFloat = 64
+    fileprivate let navigationBarHeight: CGFloat = 64
     
-    private var barLine: UIView!
-    public var title: String! {
+    fileprivate var barLine: UIView!
+    open var title: String! {
         didSet {
-            guard let title = title where titleLabel != nil else {
+            guard let title = title, titleLabel != nil else {
                 return
             }
             
             titleLabel.text = title
         }
     }
-    public var titleLabel: UILabel!
+    open var titleLabel: UILabel!
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,32 +34,32 @@ public class LYNavigationBar: UIView {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        let screenSize = UIScreen.mainScreen().bounds.size
+        let screenSize = UIScreen.main.bounds.size
         
-        let frame = CGRectMake(0, 0, screenSize.width, navigationBarHeight)
+        let frame = CGRect(x: 0, y: 0, width: screenSize.width, height: navigationBarHeight)
         setup(frame)
     }
     
-    func setup(frame: CGRect) {
+    func setup(_ frame: CGRect) {
         
-        let screenSize = UIScreen.mainScreen().bounds.size
+        let screenSize = UIScreen.main.bounds.size
         
-        self.frame = CGRectMake(0, 0, screenSize.width, navigationBarHeight)
+        self.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: navigationBarHeight)
         self.backgroundColor = UIColor(white: 0.960, alpha: 1.0)
         
         
-        barLine = UIView(frame: CGRectMake(0, navigationBarHeight - 1, screenSize.width, 1))
+        barLine = UIView(frame: CGRect(x: 0, y: navigationBarHeight - 1, width: screenSize.width, height: 1))
         barLine.backgroundColor = UIColor(white: 0.639, alpha: 1.0)
         self.addSubview(barLine)
         
-        titleLabel = UILabel(frame: CGRectMake(0, 20, 100, 43))
+        titleLabel = UILabel(frame: CGRect(x: 0, y: 20, width: 100, height: 43))
         titleLabel.text = self.title
-        titleLabel.textAlignment = .Center
-        titleLabel.lineBreakMode = .ByTruncatingTail
-        titleLabel.textColor = UIColor.blackColor()
+        titleLabel.textAlignment = .center
+        titleLabel.lineBreakMode = .byTruncatingTail
+        titleLabel.textColor = UIColor.black
         self.addSubview(titleLabel)
         
-        titleLabel.center = CGPointMake(self.center.x, titleLabel.center.y)
+        titleLabel.center = CGPoint(x: self.center.x, y: titleLabel.center.y)
         
     }
 

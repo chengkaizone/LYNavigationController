@@ -22,9 +22,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func pushAction(sender: AnyObject) {
+    @IBAction func pushAction(_ sender: AnyObject) {
         
-        let secondControl = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("SecondViewController")
+        let secondControl = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SecondViewController")
         self.navigationController?.pushViewController(secondControl, animated: true)
         
     }

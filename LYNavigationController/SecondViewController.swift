@@ -23,7 +23,7 @@ class SecondViewController: UIViewController {
 
     @IBAction func popAction() {
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
 
 }

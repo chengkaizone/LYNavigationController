@@ -10,31 +10,31 @@ import UIKit
 
 class LYBarButtonItem: UIButton {
 
-    class func buttonWithTitle(title: String) ->LYBarButtonItem {
+    class func buttonWithTitle(_ title: String) ->LYBarButtonItem {
         
-        let barButtonItem = LYBarButtonItem(type: .Custom)
+        let barButtonItem = LYBarButtonItem(type: .custom)
         
-        let font = UIFont.boldSystemFontOfSize(17.0)
-        var buttonSize = (title as NSString).sizeWithAttributes([NSFontAttributeName:font])
+        let font = UIFont.boldSystemFont(ofSize: 17.0)
+        var buttonSize = (title as NSString).size(attributes: [NSFontAttributeName:font])
         if buttonSize.width > 68 {
             buttonSize.width = 68
         }
         
-        barButtonItem.titleLabel?.lineBreakMode = NSLineBreakMode.ByClipping
-        barButtonItem.frame = CGRectMake(0, 0, buttonSize.width, 33)
-        barButtonItem.setTitle(title, forState: .Normal)
-        barButtonItem.tintColor = UIColor.whiteColor()
+        barButtonItem.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+        barButtonItem.frame = CGRect(x: 0, y: 0, width: buttonSize.width, height: 33)
+        barButtonItem.setTitle(title, for: UIControlState())
+        barButtonItem.tintColor = UIColor.white
         barButtonItem.titleLabel?.font = font
         
         return barButtonItem
     }
     
-    class func buttonWithImage(imageNormal: UIImage?, imageSelected: UIImage?) ->LYBarButtonItem {
+    class func buttonWithImage(_ imageNormal: UIImage?, imageSelected: UIImage?) ->LYBarButtonItem {
         
-        let barButtonItem = LYBarButtonItem(type: .Custom)
-        barButtonItem.frame = CGRectMake(0, 0, 33, 33)
-        barButtonItem.setImage(imageNormal, forState: .Normal)
-        barButtonItem.setImage(imageSelected, forState: .Highlighted)
+        let barButtonItem = LYBarButtonItem(type: .custom)
+        barButtonItem.frame = CGRect(x: 0, y: 0, width: 33, height: 33)
+        barButtonItem.setImage(imageNormal, for: UIControlState())
+        barButtonItem.setImage(imageSelected, for: .highlighted)
         
         return barButtonItem
     }
